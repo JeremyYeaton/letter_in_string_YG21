@@ -1,7 +1,9 @@
 # Positional cueing, string location variability, and letter-in-string identification
 ## Yeaton & Grainger, 2021
 
-This repository contains the data processing and analysis scripts for (CITATION). Due to GDPR, the raw data are hosted on OSF: https://osf.io/9678y/
+This repository contains the data processing and analysis scripts for (CITATION). 
+
+Due to GDPR, the raw data are hosted on OSF: https://osf.io/9678y/
 
 Any questions regarding the data or analysis can be directed to the first author at: jyeaton@uci.edu
 
