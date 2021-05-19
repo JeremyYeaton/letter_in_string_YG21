@@ -4,11 +4,13 @@
 # February 2021
 
 # Import libraries and data -----------------------------------------------
-
 library(tidyverse)
 
-source('scripts/A_DataPreprocessing.R')
+# Clear the environment
+rm(list=ls()) 
 
+# Read in the data
+source('scripts/A_DataPreprocessing.R')
 
 # Assign colors -----------------------------------------------------------
 
