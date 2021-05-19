@@ -18,6 +18,7 @@ This analysis pipeline relies on the following R packages:
 - tidyverse
 - lme4
 - lmerTest
+- [ggpattern](https://coolbutuseless.github.io/package/ggpattern/index.html) (for the pattern fills in the bar plots)
 
 It also expects the scripts to be in a "scripts" directory, as well as the data in a "data" dirctory. The figures script will expect a "figures" directory to save them in.
 
