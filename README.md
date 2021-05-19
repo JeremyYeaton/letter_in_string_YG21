@@ -14,7 +14,7 @@ Due to GDPR, the raw data are hosted on OSF: https://osf.io/9678y/
 - **data_raw_exp3.csv** Raw data from Experiment 3 (100 ms display; 13-hash cue instead of 5-hash in Exp 2; fixed or variable by 4 characters)
 
 ## Setup
-This analysis pipeline relies on the following R packages:
+This analysis pipeline relies on the following R packages (mostly available from CRAN):
 - tidyverse
 - lme4
 - lmerTest
