@@ -61,3 +61,5 @@ This repository contains 4 R scripts in the "scripts" directory:
 Variables not addressed in the paper but useful if interested in the serial position function:
 - outerInner: if the cued character was outer (first or last in the string) or inner (positions 2, 3, and 4 in the string)
 - firstLast: if the cued character was first or last (or inner)
+
+Again, if you have questions feel free to reach out: jyeaton@uci.edu
