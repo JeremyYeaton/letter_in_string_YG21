@@ -25,6 +25,7 @@ This repository contains 3 R scripts in the "scripts" directory:
 - **A_DataPreprocessing.R** Imports the various data files, removes practice trials (and pilot data), and exports two dataframes: *demographics*, and *expTrials* for which the columns are laid out in the **Codebook** section below. Saves the *expTrials* dataframe in the data directory as *exp_trials.csv*.
 - **B_Statistics.R** Contains the code to get the summary statistics and models reported in the paper.
 - **C_Figures.R** Contains the code to reproduce the figures in the paper.
+- **X1_SerialPositionFigures.R** Contains the code to visualize the Serial Position Functions for each experiment (results separated by position in string instead of aggregated by condition).
 
 ## Codebook
 ### Columns -- *demographics* dataframe
