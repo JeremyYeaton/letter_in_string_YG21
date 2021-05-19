@@ -19,7 +19,7 @@ This analysis pipeline relies on the following R packages:
 - lme4
 - lmerTest
 
-It also expects the scripts to be in a "scripts" directory, as well as the data in a "data" dirctory. The figures script will also expect a "figures" directory.
+It also expects the scripts to be in a "scripts" directory, as well as the data in a "data" dirctory. The figures script will expect a "figures" directory to save them in.
 
 ## Scripts
 This repository contains 4 R scripts in the "scripts" directory:
