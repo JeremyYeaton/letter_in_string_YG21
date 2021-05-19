@@ -3,11 +3,10 @@
 
 This repository contains the data processing and analysis scripts for (CITATION). 
 
-Due to GDPR, the raw data are hosted on OSF: https://osf.io/9678y/
-
 Any questions regarding the data or analysis can be directed to the first author at: jyeaton@uci.edu
 
 ## Data files
+Due to GDPR, the raw data are hosted on OSF: https://osf.io/9678y/
 - **data_raw_pilot.csv** This data is not reported in the paper, but contains experimental data collected from 49 participants who completed the same task as described in Experiment 1A but with a 200 ms stimulus display time instead of 100 ms.
 - **data_raw_exp1a.csv** Raw data from Experiment 1A (100 ms display; ordinal pre cue, or underscore post cue; fixed or variable by 2 characters)
 - **data_raw_exp1b.csv** Raw data from Experiment 1B (100 ms display; ordinal pre cue, or underscore post cue; fixed or variable by 4 characters)
