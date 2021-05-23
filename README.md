@@ -1,4 +1,4 @@
-## Yeaton & Grainger, 2021Positional cueing, string location variability, and letter-in-string identification
+## README
 
 This repository contains the data processing and analysis scripts for:
 
