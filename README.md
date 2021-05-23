@@ -1,7 +1,8 @@
 # Positional cueing, string location variability, and letter-in-string identification
 ## Yeaton & Grainger, 2021
 
-This repository contains the data processing and analysis scripts for (CITATION). 
+This repository contains the data processing and analysis scripts for: 
+Yeaton & Grainger (2021). _Positional cueing, string location variability, and letter-in-string identification_. [[manuscript]](https://jeremyyeaton.github.io/papers/Yeaton_Grainger-2021-manuscript-LetterInString.pdf)
 
 Any questions regarding the data or analysis can be directed to the first author at: jyeaton@uci.edu
 
