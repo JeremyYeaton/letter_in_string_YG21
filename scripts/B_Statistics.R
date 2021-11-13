@@ -49,7 +49,7 @@ summary(exp1b.glmer)
 
 ## GLMER of only var data from exps 1A and 1B ####
 
-exp1ab2.glmer <- expTrials %>%
+exp1ab.glmer <- expTrials %>%
   filter(fixPos == 'var', expNum %in% c(1,2)) %>%
   mutate(expNum = factor(expNum)) %>%
   glmer(correct_TF ~ cueTime * expNum * LR +
@@ -57,7 +57,7 @@ exp1ab2.glmer <- expTrials %>%
         data=.,
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
-summary(exp1ab2.glmer)
+summary(exp1ab.glmer)
 
 # Experiment 2 ------------------------------------------------------------
 # Within Expt 2 (pre ordinal vs. underscore cues)
