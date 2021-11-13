@@ -6,9 +6,6 @@
 # Import libraries and data -----------------------------------------------
 library(tidyverse)
 
-# Clear the environment
-rm(list=ls()) 
-
 # Read in the data
 source('scripts/A_DataPreprocessing.R')
 
