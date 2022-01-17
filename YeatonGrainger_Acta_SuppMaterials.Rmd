@@ -12,7 +12,7 @@ library(tidyverse)
 library(kableExtra)
 library(sjPlot)
 options(knitr.table.format = "html")
-load('scripts/letter_in_string_stats1.RData')
+load('scripts/letter_in_string_stats.RData')
 ```
 
 Skip to:
