@@ -5,19 +5,9 @@
 
 # Import libraries and data -----------------------------------------------
 library(tidyverse)
-# library(ggpattern)
-
-# Clear the environment
-rm(list=ls()) 
 
 # Read in the data
 source('scripts/A_DataPreprocessing.R')
-
-# Assign colors -----------------------------------------------------------
-
-# Colors needed:
-color_ord = 'dodgerblue3' # blue
-color_und = 'maroon3'     # pink
 
 barSize = 0.5
 
@@ -43,14 +33,10 @@ exp1.plot <- exp1_toplot %>%
   mutate(expNum = ifelse(expNum == 1, 'Experiment 1A','Experiment 1B')) %>%
   ggplot(aes(fill=cueTime,y=accuracy,x=fixPos)) +
   geom_bar(stat='identity',position='dodge',width = 0.75) +
-  # geom_bar_pattern(aes(pattern=cueTime),stat='identity',position='dodge',width=0.75,
-  #                  pattern_fill='black',pattern_colour='black',pattern_spacing=0.025,pattern_size=0) +
   geom_errorbar(aes(ymin=accuracy-se,ymax=accuracy+se,width= .25),
                 size=barSize,show.legend = FALSE,color='black',position=position_dodge(0.75)) +
   facet_grid(~expNum) +
   coord_cartesian(ylim=c(0,1)) +
-  # scale_fill_manual(values=c(color_ord,color_und)) +
-  # scale_pattern_manual(values=c(1,2)) +
   labs(y='Accuracy',x='String location',fill='Cue type',pattern='Cue type',linetype='Experiment') +
   theme_bw() +
   theme(legend.position = 'bottom')
@@ -80,13 +66,10 @@ varTrials.plot <- varTrials_toplot %>%
   mutate(expNum = ifelse(expNum == 1, 'Experiment 1A','Experiment 1B')) %>%
   ggplot(aes(fill=cueTime,y=accuracy,x=LR)) +
   geom_bar(stat='identity',position='dodge',width = 0.75) +
-  # geom_bar_pattern(aes(pattern=cueTime),stat='identity',position='dodge',width=0.75,
-  #                  pattern_fill='black',pattern_colour='black',pattern_spacing=0.025,pattern_size=0) +
   geom_errorbar(aes(ymin=accuracy-se,ymax=accuracy+se,width= .25),
                 size=barSize,show.legend = FALSE,color='black',position=position_dodge(0.75)) +
   facet_grid(~expNum) +
   coord_cartesian(ylim=c(0,1)) +
-  # scale_fill_manual(values=c(color_ord,color_und)) +
   labs(y='Accuracy',x='Location on screen',fill='Cue type',pattern='Cue type',linetype='Experiment') +
   theme_bw() +
   theme(legend.position = 'bottom')
@@ -116,13 +99,10 @@ exp2_toplot <- expTrials %>%
 exp2.plot <- exp2_toplot %>%
   ggplot(aes(fill=cueType,y=accuracy,x=fixPos)) +
   geom_bar(stat='identity',position='dodge',width = 0.75) +
-  # geom_bar_pattern(aes(pattern=cueType),stat='identity',position='dodge',width=0.75,
-  #                  pattern_fill='black',pattern_colour='black',pattern_spacing=0.025,pattern_size=0) +
   geom_errorbar(aes(ymin=accuracy-se,ymax=accuracy+se,width= .25),
                 size=barSize,show.legend = FALSE,color='black',position=position_dodge(0.75)) +
   facet_grid(~expNum) +
   coord_cartesian(ylim=c(0,1)) +
-  # scale_fill_manual(values=c(color_ord,color_und)) +
   labs(y='Accuracy',x='String location',fill='Cue type',pattern='Cue type',linetype='Experiment') +
   theme_bw() +
   theme(legend.position = 'bottom')
@@ -152,12 +132,9 @@ exp2_var.toplot <- expTrials %>%
 exp2_var.plot <- exp2_var.toplot %>%
   ggplot(aes(fill=cueType,y=accuracy,x=LR)) +
   geom_bar(stat='identity',position='dodge',width = 0.75) +
-  # geom_bar_pattern(aes(pattern=cueType),stat='identity',position='dodge',width=0.75,
-  #                  pattern_fill='black',pattern_colour='black',pattern_spacing=0.025,pattern_size=0) +
   geom_errorbar(aes(ymin=accuracy-se,ymax=accuracy+se,width= .25),
                 size=barSize,show.legend = FALSE,color='black',position=position_dodge(0.75)) +
   coord_cartesian(ylim=c(0,1)) +
-  # scale_fill_manual(values=c(color_ord,color_und)) +
   labs(y='Accuracy',x='Location on screen',fill='Cue type',pattern='Cue type',linetype='Experiment') +
   theme_bw() +
   theme(legend.position = 'bottom')
@@ -185,8 +162,6 @@ exp3_toplot <- expTrials %>%
 exp3.plot <- exp3_toplot %>%
   ggplot(aes(y=accuracy,x=fixPos)) +
   geom_bar(stat='identity',position='dodge',width = 0.75, fill = '#00BFC4') + #,fill=color_und) +
-  # geom_bar_pattern(aes(pattern=cueType),stat='identity',position='dodge',width=0.75,fill=color_und,
-  #                  pattern_fill='black',pattern_colour='black',pattern_spacing=0.025,pattern='circle',pattern_size=0) +
   geom_errorbar(aes(ymin=accuracy-se,ymax=accuracy+se,width= .25),
                 size=barSize,show.legend = FALSE,color='black',position=position_dodge(0.75)) +
   facet_grid(~expNum) +
@@ -220,13 +195,10 @@ varTrials3.plot <- varTrials3_toplot %>%
   mutate(expNum = ifelse(expNum == 3, 'Experiment 2','Experiment 3')) %>%
   ggplot(aes(fill=cueType,y=accuracy,x=LR)) +
   geom_bar(stat='identity',position='dodge',width = 0.75) +
-  # geom_bar_pattern(aes(pattern=cueTime),stat='identity',position='dodge',width=0.75,
-  #                  pattern_fill='black',pattern_colour='black',pattern_spacing=0.025,pattern_size=0) +
   geom_errorbar(aes(ymin=accuracy-se,ymax=accuracy+se,width= .25),
                 size=barSize,show.legend = FALSE,color='black',position=position_dodge(0.75)) +
   facet_grid(~expNum) +
   coord_cartesian(ylim=c(0,1)) +
-  # scale_fill_manual(values=c(color_ord,color_und)) +
   labs(y='Accuracy',x='Location on screen',fill='Cue type',pattern='Cue type',linetype='Experiment') +
   theme_bw() +
   theme(legend.position = 'bottom')

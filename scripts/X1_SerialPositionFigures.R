@@ -52,7 +52,7 @@ exp1_toplot <- expTrials %>%
          cueChar = as.numeric(substr(cueChar,4,4)))
 
 
-exp1.plot <- exp1_toplot %>%
+exp1SPF.plot <- exp1_toplot %>%
   mutate(expNum = ifelse(expNum == 1, '1A','1B')) %>%
   ggplot(aes(x=cueChar,y=accuracy,group=task,color=expNum)) +
   geom_path(aes(linetype=expNum)) +
@@ -62,7 +62,7 @@ exp1.plot <- exp1_toplot %>%
   scale_linetype_manual(values = c(1,2)) +
   scale_color_manual(values=c(color_exp1a,color_exp1b)) +
   labs(y='Accuracy',x='Position in string',color='Experiment',linetype='Experiment')
-exp1.plot
+exp1SPF.plot
 
 # Variable condition split by left/middle/right
 varTrials_toplot <- expTrials %>%
@@ -91,7 +91,7 @@ varTrials_toplot <- expTrials %>%
          task = paste(Task_Name, expNum, sep='_'),
          cueChar = as.numeric(substr(cueChar,4,4))) 
 
-varTrials.plot <- varTrials_toplot %>%
+varTrialsSPF.plot <- varTrials_toplot %>%
   mutate(expNum = ifelse(expNum == 1, '1A','1B')) %>%
   ggplot(aes(x=cueChar,y=accuracy,color=expNum,group=LRexp)) +
   geom_path(aes(linetype=expNum)) +
@@ -101,7 +101,7 @@ varTrials.plot <- varTrials_toplot %>%
   labs(y='Accuracy',x='Position in string',color = 'Experiment',linetype='Experiment') +
   scale_color_manual(values=c(color_exp1a,color_exp1b)) +
   scale_linetype_manual(values=c(1,2))
-varTrials.plot
+varTrialsSPF.plot
 
 # Experiment 2 ------------------------------------------------------------
 
@@ -129,7 +129,7 @@ exp2_toplot <- expTrials %>%
          cueChar = as.numeric(substr(cueChar,4,4)),
          expNum = as.character(expNum))
 
-exp2.plot <- exp2_toplot %>%
+exp2SPF.plot <- exp2_toplot %>%
   mutate(expNum = ifelse(expNum == 2, '1B','2')) %>%
   ggplot(aes(x=cueChar,y=accuracy,color=expNum,group=Task_Name)) +
   geom_path(aes(linetype=expNum)) +
@@ -140,7 +140,7 @@ exp2.plot <- exp2_toplot %>%
   scale_color_manual(values=c(color_exp1b,color_exp2)) +
   theme(line = element_line(linetype=c(1,2))) +
   scale_linetype_manual(values=c(2,3))
-exp2.plot
+exp2SPF.plot
 
 # Experiment 3 ------------------------------------------------------------
 
@@ -172,7 +172,7 @@ exp3_toplot <- expTrials %>%
          expNum = as.character(expNum),
          task = paste(Task_Name,LR,sep='_'))
 
-exp3.plot <- exp3_toplot %>%
+exp3SPF.plot <- exp3_toplot %>%
   mutate(expNum = ifelse(expNum == 3, '2','3')) %>%
   ggplot(aes(x=cueChar,y=accuracy,color=expNum,group=task)) +
   geom_path(aes(linetype=expNum)) +
@@ -182,9 +182,9 @@ exp3.plot <- exp3_toplot %>%
   labs(y='Accuracy',x='Location on screen',color = 'Experiment',linetype='Experiment') +
   scale_color_manual(values=c(color_exp2,color_exp3)) +
   scale_linetype_manual(values = c(3,4))
-exp3.plot
+exp3SPF.plot
 
-exp1.plot
-varTrials.plot
-exp2.plot
-exp3.plot
+exp1SPF.plot
+varTrialsSPF.plot
+exp2SPF.plot
+exp3SPF.plot

@@ -27,9 +27,8 @@ expTrials %>%
 
 exp1a.glmer <- expTrials %>%
   filter(expNum == 1) %>%
-  glmer(correct_TF ~ cueTime * fixPos +
-          # (cueTime*fixPos|exp_subject_id) * (1|Trial_Id) * (1|cueChar),
-          (cueTime*fixPos|exp_subject_id) * (cueTime|Trial_Id) * (cueTime|cueChar),
+  glmer(correct_TF ~ cueTime * fixPos + cueChar +
+          (cueTime*fixPos|exp_subject_id) * (cueTime*fixPos|Trial_Id),
         data=.,
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
@@ -39,21 +38,21 @@ summary(exp1a.glmer)
 
 exp1b.glmer <- expTrials %>%
   filter(expNum == 2) %>%
-  glmer(correct_TF ~ cueTime * fixPos +
-          (cueTime*fixPos|exp_subject_id) * (cueTime|Trial_Id) * (1|cueChar),
+  glmer(correct_TF ~ cueTime * fixPos + cueChar +
+          (cueTime*fixPos|exp_subject_id) * (cueTime|Trial_Id),
         data=.,
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
 summary(exp1b.glmer)
 
 
-## GLMER of only var data from exps 1A and 1B ####
+## GLMER of only var data from Exps 1A and 1B ####
 
 exp1ab.glmer <- expTrials %>%
   filter(fixPos == 'var', expNum %in% c(1,2)) %>%
   mutate(expNum = factor(expNum)) %>%
-  glmer(correct_TF ~ cueTime * expNum * LR +
-          (cueTime+LR|exp_subject_id) * (1|Trial_Id) * (1|cueChar),
+  glmer(correct_TF ~ cueTime * expNum * LR + cueChar +
+          (cueTime+LR|exp_subject_id) * (1|Trial_Id),
         data=.,
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
@@ -64,8 +63,8 @@ summary(exp1ab.glmer)
 
 exp2.glmer <- expTrials %>%
   filter(expNum == 3) %>%
-  glmer(correct_TF ~ cueType * fixPos + 
-          (cueType*fixPos|exp_subject_id) * (1|Trial_Id) * (cueType|cueChar),
+  glmer(correct_TF ~ cueType * fixPos + cueChar + 
+          (cueType*fixPos|exp_subject_id) * (1|Trial_Id),
         data=., 
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
@@ -76,8 +75,8 @@ summary(exp2.glmer)
 maskTime.glmer <- expTrials %>%
   filter(expNum %in% c(2,3),cueType == 'mask') %>%
   mutate(expNum = as.factor(expNum)) %>%
-  glmer(correct_TF ~ cueTime * fixPos + 
-          (cueTime*fixPos|exp_subject_id) * (1|Trial_Id) * (cueTime|cueChar),
+  glmer(correct_TF ~ cueTime * fixPos + cueChar + 
+          (cueTime*fixPos|exp_subject_id) * (1|Trial_Id),
         data=., 
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
@@ -89,12 +88,21 @@ summary(maskTime.glmer)
 
 maskSize.glmer <- expTrials %>%
   filter(expNum %in% c(3,4), cueType == 'mask') %>%
-  mutate(maskSize = ifelse(expNum == 4,'big','small')) %>%
-  glmer(correct_TF ~ maskSize * fixPos + 
-          (maskSize*fixPos|exp_subject_id) * (1|Trial_Id) * (maskSize+fixPos|cueChar),
+  mutate(maskSize = ifelse(expNum == 4,'big','small'),
+         idx_in_string = as.character(idx_in_string)) %>%
+  glmer(correct_TF ~ maskSize * fixPos + idx_in_string + 
+          (maskSize+fixPos|exp_subject_id) * (1|Trial_Id),
         data=., 
         family = 'binomial',
         control = glmerControl(optimizer = 'bobyqa',optCtrl = list(maxfun = 100000)))
+summary(maskSize.glmer)
+
+## Summaries for all glmer models ####
+summary(exp1a.glmer)
+summary(exp1b.glmer)
+summary(exp1ab.glmer)
+summary(exp2.glmer)
+summary(maskTime.glmer)
 summary(maskSize.glmer)
 
 # Accuracy by condition for Exp. 2 and 3

@@ -93,5 +93,3 @@ exp3_err.plot <- errorDist %>%
   labs(x= 'Response distance from cued letter',
        y = 'Number of errors')
 exp3_err.plot
-
-save.image('scripts/letter_in_string_w_errors_env.RData')
