@@ -1,0 +1,245 @@
+---
+title: "Supplementary Materials to Yeaton & Grainger (2022)"
+author: "Jeremy Yeaton & Jonathan Grainger"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+# library(equatiomatic)
+library(kableExtra)
+library(sjPlot)
+options(knitr.table.format = "html")
+load('scripts/letter_in_string_stats1.RData')
+```
+
+Skip to:
+
+- [Formulas and full results for mixed-effects models](#formulas)
+
+- [Explorations into error types](#errors)
+
+- [Serial position functions](#serial)
+
+- [Tables of participant x condition means](#data)
+
+## Formulae and full results for mixed-effects models {#formulas}
+
+All non-numeric variables were dummy coded per the R defaults.
+
+### Experiment 1A
+```{r exp1a_lmer, echo=FALSE}
+exp1a.glmer@call[["formula"]]
+
+#extract_eq(exp1a.glmer)
+```
+Where `cueTime` corresponds to pre- or post-cueing, `fixPos` corresponds to whether string location on screen is fixed or variable, and `cueChar` is position in string. `exp_subject_id` is the participant identifier, and `Trial_Id` is the item identifier.
+
+#### Full results
+```{r exp1a_lmer results, echo=FALSE}
+tab_model(exp1a.glmer)
+```
+
+
+### Experiment 1B
+```{r exp1b_lmer, echo=FALSE}
+exp1b.glmer@call[["formula"]]
+
+#extract_eq(exp1b.glmer)
+```
+
+#### Full results
+```{r exp1b_lmer results, echo=FALSE}
+tab_model(exp1b.glmer)
+```
+
+
+### Experiments 1A & 1B: Variable location conditions
+```{r exp1ab_lmer, echo=FALSE}
+exp1ab.glmer@call[["formula"]]
+
+# extract_eq(exp1ab.glmer)
+```
+
+#### Full results
+```{r exp1ab_lmer results, echo=FALSE}
+tab_model(exp1ab.glmer)
+```
+
+
+### Experiment 2
+```{r exp2_lmer, echo=FALSE}
+exp2.glmer@call[["formula"]]
+
+# extract_eq(exp2.glmer)
+```
+
+#### Full results
+```{r exp2_lmer results, echo=FALSE}
+tab_model(exp2.glmer)
+```
+
+
+### Experiments 1B & 2: Cue time
+```{r maskTime_lmer, echo=FALSE}
+maskTime.glmer@call[["formula"]]
+
+# extract_eq(maskTime.glmer)
+```
+
+#### Full results
+```{r maskTime_lmer results, echo=FALSE}
+tab_model(maskTime.glmer)
+```
+
+### Experiments 2 & 3: Mask size
+```{r maskSize_lmer, echo=FALSE}
+maskSize.glmer@call[["formula"]]
+
+# extract_eq(maskSize.glmer)
+```
+
+#### Full results
+```{r maskSize_lmer results, echo=FALSE}
+tab_model(maskSize.glmer)
+```
+
+## Explorations into error types {#errors}
+
+Overall, Experiments 1A, 1B, and 2 (which had the 5-hash mask) had about 30% of errors where the reported letter was not actually in the string. Experiment 3 (13-hash mask) only had about 20% of errors where the reported letter wasn't in the string. 
+
+```{r error_table, echo=FALSE}
+errorTypes %>%
+  group_by(expNum) %>%
+  summarize(errs_in_exp = n(),.groups='keep') %>%
+  merge(errorTypes) %>%
+  group_by(rep_in_string,expNum,errs_in_exp) %>%
+  summarize(n_errs = n(),.groups='keep') %>%
+  mutate(prop_errs = n_errs/errs_in_exp) %>%
+  ungroup() %>%
+  arrange(expNum) %>%
+  rename('Response in target string?'=rep_in_string,
+         'Experiment number'=expNum,
+         'Count of errors'=n_errs,
+         'Proportion of errs in Exp'=prop_errs) %>%
+  select(-errs_in_exp) %>%
+  kbl() %>%
+  kable_styling()
+```
+
+From the errors where the reported letter was in the string, we looked at how far the erroneous letter was from the cued one and present the results graphically below.
+
+```{r overall_err_plot, echo = FALSE}
+byExp_err.plot
+```
+
+The columns are the cued letter, and the rows are the experiments. Naturally, we don't have a lot of errors for the first and last positions, but there's something interesting going on in experiment 3 for the first position where a lot of people reported the second character, whereas in the other experiments, it seems like the errors are drawn randomly from the rest of the string. For the middle positions, we see more errors in adjacent positions, with a progressive drop-off with increasing eccentricity from the cued letter.
+
+
+Separated by experiment, cue time (pre or post) or type (ordinal vs underscore), fixed vs variable position, and position on screen (left, center, right):
+
+### Experiment 1A
+```{r exp1a_err_plot, echo = FALSE}
+exp1A_err.plot
+```
+
+### Experiment 1B
+```{r exp1b_err_plot, echo = FALSE}
+exp1B_err.plot
+```
+
+### Experiment 2
+```{r exp2_err_plot, echo = FALSE}
+exp2_err.plot
+```
+
+### Experiment 3
+```{r exp3_err_plot, echo = FALSE}
+exp3_err.plot
+```
+
+## Serial position functions {#serial}
+
+### Experiment 1
+```{r exp1_ser_plot, echo = FALSE}
+exp1SPF.plot
+```
+
+### Variable location trials (Exp 1)
+```{r exp1_var_plot, echo = FALSE}
+varTrialsSPF.plot
+```
+
+### Experiment 2
+```{r exp2_ser_plot, echo = FALSE}
+exp2SPF.plot
+```
+
+### Experiment 3
+```{r exp3_ser_plot, echo = FALSE}
+exp3SPF.plot
+```
+
+
+## Tables of data {#data}
+
+Percent correct per participant and condition. `fix` corresponds to the Fixed location condition, `var` to variable. `Ord` for Ordinal, `Und` for Underscore.
+
+### Experiment 1A
+
+```{r table_exp1a,echo=F}
+expTrials %>%
+  filter(expNum == 1) %>%
+  mutate(cueType = ifelse(cueType == 'digit','Ord','Und')) %>%
+  mutate(Condition = paste(fixPos,cueType)) %>%
+  group_by(exp_subject_id,Condition) %>%
+  summarize(Accuracy = mean(correct_TF),.groups='keep') %>%
+  pivot_wider(names_from=Condition,values_from=Accuracy) %>%
+  rename('Participant ID'=exp_subject_id) %>%
+  kbl() %>%
+  kable_styling(fixed_thead=T)
+```
+
+### Experiment 1B
+```{r table_exp1b,echo=F}
+expTrials %>%
+  filter(expNum == 2) %>%
+  mutate(cueType = ifelse(cueType == 'digit','Ord','Und')) %>%
+  mutate(Condition = paste(fixPos,cueType)) %>%
+  group_by(exp_subject_id,Condition) %>%
+  summarize(Accuracy = mean(correct_TF),.groups='keep') %>%
+  pivot_wider(names_from=Condition,values_from=Accuracy) %>%
+  rename('Participant ID'=exp_subject_id) %>%
+  kbl() %>%
+  kable_styling(fixed_thead=T)
+```
+
+### Experiment 2
+```{r table_exp2,echo=F}
+expTrials %>%
+  filter(expNum == 3) %>%
+  mutate(cueType = ifelse(cueType == 'digit','Ord','Und')) %>%
+  mutate(Condition = paste(fixPos,cueType)) %>%
+  group_by(exp_subject_id,Condition) %>%
+  summarize(Accuracy = mean(correct_TF),.groups='keep') %>%
+  pivot_wider(names_from=Condition,values_from=Accuracy) %>%
+  rename('Participant ID'=exp_subject_id) %>%
+  kbl() %>%
+  kable_styling(fixed_thead=T)
+```
+
+### Experiment 3
+```{r table_exp3,echo=F}
+expTrials %>%
+  filter(expNum == 4) %>%
+  mutate(cueType = ifelse(cueType == 'digit','Ord','Und')) %>%
+  mutate(Condition = paste(fixPos,cueType)) %>%
+  group_by(exp_subject_id,Condition) %>%
+  summarize(Accuracy = mean(correct_TF),.groups='keep') %>%
+  pivot_wider(names_from=Condition,values_from=Accuracy) %>%
+  rename('Participant ID'=exp_subject_id) %>%
+  kbl() %>%
+  kable_styling(fixed_thead=T)
+```
