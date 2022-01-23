@@ -2,7 +2,7 @@
 
 This repository contains the data processing and analysis scripts for:
 
-Yeaton, J.D. & Grainger, J. (2021). _Positional cueing, string location variability, and letter-in-string identification_. [[manuscript]](https://jeremyyeaton.github.io/papers/Yeaton_Grainger-2021-manuscript-LetterInString.pdf)
+Yeaton, J.D. & Grainger, J. (2022). _Positional cueing, string location variability, and letter-in-string identification_. Acta Psychologica. [[full text]](https://www.sciencedirect.com/science/article/pii/S0001691822000257)
 
 Any questions regarding the data or analysis can be directed to the first author at: jyeaton@uci.edu
 
@@ -23,7 +23,6 @@ This analysis pipeline relies on the following R packages (mostly available from
 - tidyverse
 - lme4
 - lmerTest
-- [ggpattern](https://coolbutuseless.github.io/package/ggpattern/index.html) (for the pattern fills in the bar plots)
 
 It also expects the scripts to be in a "scripts" directory, as well as the data in a "data" dirctory. The figures script will expect a "figures" directory to save them in.
 
